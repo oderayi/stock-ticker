@@ -1,0 +1,25 @@
+{
+  "name": "stock-ticker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oderayi/stock-ticker.git"
+  },
+  "keywords": [
+    "finance",
+    "stock-ticker",
+    "restful",
+    "api"
+  ],
+  "author": "Steven Oderayi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oderayi/stock-ticker/issues"
+  },
+  "homepage": "https://github.com/oderayi/stock-ticker#readme"
+}
