@@ -7,7 +7,7 @@
     "start": "node src/server.js",
     "test": "jest",
     "docker-build": "docker build -t oderayi/stock-ticker-node .",
-    "docker-run": "docker run -p 3000:3000 -d --init --rm -u node -e NODE_ENV=production --name stock-ticker oderayi/stock-ticker-node"
+    "docker-run": "docker run -p 3000:3000 -d --init -u node -e NODE_ENV=production oderayi/stock-ticker-node"
   },
   "repository": {
     "type": "git",
@@ -26,10 +26,10 @@
   },
   "homepage": "https://github.com/oderayi/stock-ticker#readme",
   "dependencies": {
-    "express": "^4.17.0"
+    "express": "^4.17.0",
+    "redis": "^2.8.0"
   },
   "devDependencies": {
-    "jest": "^24.8.0",
-    "nodemon": "^1.19.0"
+    "jest": "^24.8.0"
   }
 }
