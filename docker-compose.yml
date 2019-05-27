@@ -2,29 +2,31 @@ version: '3'
 
 services:
   app:
-    image: oderayi/stock-ticker-node:latest
-    container_name: stock-ticker-app-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: oderayi/stock-ticker-node
+    container_name: stock-ticker-app
     restart: unless-stopped
+    env_file: .env
     environment:
-      - NODE_ENV=production
-      - REDIS_URL=redis://stock-ticker-cache-container
+      - REDIS_URL=$REDIS_URL
+      - ALPHA_VANTAGE_API_KEY=$ALPHA_VANTAGE_API_KEY
     ports:
       - "3000:3000"
     volumes:
       - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
     networks:
       - stock-ticker-network
-    command: ./wait-for.sh redis:6379 -- node src/server.js
+    command: ./wait-for.sh redis:6379 -- nodemon src/server.js
     depends_on:
     - redis
   
   redis:
     image: redis:5.0.5-alpine
-    container_name: stock-ticker-cache-container
+    container_name: stock-ticker-cache
     restart: unless-stopped
-    expose: 
-      - 6379
+    ports: ["6379"]
     networks:
       - stock-ticker-network 
     volumes:
@@ -36,5 +38,4 @@ networks:
     driver: bridge
 
 volumes:
-  node_modules:  
   redis-data:

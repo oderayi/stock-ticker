@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-const redis = require('redis');
-const redisConfig = require('./config/redis-config');
-const { promisify } = require('util');
+const redis = require("redis");
+const redisConfig = require("../config/redis.config");
+const { promisify } = require("util");
 
 const client = redis.createClient(redisConfig.REDIS_URL)
 

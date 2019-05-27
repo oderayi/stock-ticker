@@ -1,29 +1,14 @@
-'use strict';
+"use strict";
 
-const express = require('express');
-const redisClient = require('./redis-client');
+const express = require("express");
+const apiRouter = require("./routers/api.router");
 
 const PORT = process.env.PORT || 3000;
-const HOST = '0.0.0.0';
+const HOST = "0.0.0.0";
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello world.\n');
-});
-
-app.get('/store/:key', async (req, res) => {
-    const { key } = req.params;
-    const value = req.query;
-    await redisClient.setAsync(key, JSON.stringify(value));
-    return res.send('Success');
-});
-
-app.get('/:key', async (req, res) => {
-    const { key } = req.params;
-    const rawData = await redisClient.getAsync(key);
-    return res.json(JSON.parse(rawData));
-});
+app.use("/api/v1/", apiRouter);
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);

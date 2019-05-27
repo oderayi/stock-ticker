@@ -5,9 +5,7 @@
   "scripts": {
     "start": "node src/server.js",
     "test": "jest",
-    "docker-build": "docker build -t oderayi/stock-ticker-node .",
-    "docker-run": "docker run -p 3000:3000 -d --init -u node -e NODE_ENV=production oderayi/stock-ticker-node",
-    "watch": "nodemon docker-compose down & docker-build & docker-compose up"
+    "docker-build": "docker build -t oderayi/stock-ticker-node ."
   },
   "repository": {
     "type": "git",
@@ -26,6 +24,7 @@
   },
   "homepage": "https://github.com/oderayi/stock-ticker#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "express": "^4.17.0",
     "redis": "^2.8.0"
   },

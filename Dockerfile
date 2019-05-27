@@ -4,11 +4,13 @@ RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
 WORKDIR /home/node/app
 
+RUN npm install -g nodemon
+
 COPY package*.json ./
 
 USER node
 
-RUN npm ci --only=production
+RUN npm install
 
 COPY --chown=node:node . .
 
