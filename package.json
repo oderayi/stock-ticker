@@ -2,12 +2,12 @@
   "name": "stock-ticker",
   "version": "1.0.0",
   "description": "Stock-Ticker API Service",
-  "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
     "test": "jest",
     "docker-build": "docker build -t oderayi/stock-ticker-node .",
-    "docker-run": "docker run -p 3000:3000 -d --init -u node -e NODE_ENV=production oderayi/stock-ticker-node"
+    "docker-run": "docker run -p 3000:3000 -d --init -u node -e NODE_ENV=production oderayi/stock-ticker-node",
+    "watch": "nodemon docker-compose down & docker-build & docker-compose up"
   },
   "repository": {
     "type": "git",
