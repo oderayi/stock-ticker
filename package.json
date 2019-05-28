@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node src/server.js",
     "test": "jest",
+    "coverage": "jest --coverage",
     "docker-build": "docker build -t oderayi/stock-ticker-node ."
   },
   "repository": {
@@ -25,11 +26,13 @@
   "homepage": "https://github.com/oderayi/stock-ticker#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "esm": "^3.2.25",
     "express": "^4.17.0",
     "helmet": "^3.18.0",
     "redis": "^2.8.0"
   },
   "devDependencies": {
+    "dotenv": "^8.0.0",
     "jest": "^24.8.0"
   }
 }

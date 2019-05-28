@@ -18,7 +18,7 @@ services:
       - .:/home/node/app
     networks:
       - stock-ticker-network
-    command: ./wait-for.sh redis:6379 -- nodemon src/server.js
+    command: ./wait-for.sh redis:6379 -- nodemon
     depends_on:
     - redis
   

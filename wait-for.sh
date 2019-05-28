@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# original script: https://github.com/eficode/wait-for/blob/master/wait-for
+# Original script: https://github.com/eficode/wait-for/blob/master/wait-for
+# Waits for the availability of a port on a host.
 
 TIMEOUT=15
 QUIET=0

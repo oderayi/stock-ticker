@@ -1,12 +1,13 @@
 const AVClient = require("../clients/av.client");
 const CacheService = require("../services/cache.service");
-const apikey = require("../config/av.config").apiKey;
-const getWeekNumber = require("../lib/util").getWeekNumber;
+const avConfig = require("../config/av.config");
+const { getWeekNumber } = require("../lib/util");
 
 class APIService {
-  constructor(client = null, cache = null) {
-    this.client = client || AVClient;
+  constructor(client = null, cache = null, config = null) {
+    this.client = client || new AVClient().getInstance();
     this.cache = cache || new CacheService();
+    this.config = config || avConfig;
   }
 
   async getQuote(symbol) {
@@ -36,7 +37,7 @@ class APIService {
       params: {
         function: "SYMBOL_SEARCH",
         keywords,
-        apikey
+        apikey: this.config.apiKey
       }
     });
     return result.data;
@@ -46,19 +47,24 @@ class APIService {
     if (!symbol) {
       return;
     }
-    const cacheEntry = await this.cache.get(cacheKey);
-    if (cacheEntry) {
-      return cacheEntry;
+    if (cacheKey) {
+      const cacheEntry = await this.cache.get(cacheKey);
+      if (cacheEntry) {
+        return cacheEntry;
+      }
     }
+
     const result = await this.client.get("/query", {
       params: {
         function: func,
         symbol,
-        apikey
+        apikey: this.config.apiKey
       }
     });
     const newEntry = result.data;
-    this.cache.set(cacheKey, newEntry);
+    if (cacheKey) {
+        this.cache.set(cacheKey, newEntry);
+    }
     return newEntry;
   }
 }

@@ -1,5 +1,5 @@
 "use strict";
 
-module.exports = {
+module.exports =   {
     REDIS_URL: process.env.REDIS_URL
 };

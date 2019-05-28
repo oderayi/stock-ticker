@@ -2,7 +2,7 @@ const redisClient = require("../clients/redis.client");
 
 class CacheService {
     constructor(client = null) {
-        this.client = client || redisClient;
+        this.client = client || redisClient.getInstance();
     }
 
     async get(key) {
