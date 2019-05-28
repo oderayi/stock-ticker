@@ -2,7 +2,7 @@ const axios = require("axios");
 const avConfig = require("../config/av.config");
 
 class AVClient {
-    constructor(config) {
+    constructor(config = null) {
         this.config = config || avConfig;
     }
 

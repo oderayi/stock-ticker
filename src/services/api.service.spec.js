@@ -14,6 +14,10 @@ const mockCache = { get: () => {}, set: () => {} };
 const service = new APIService(avClient, mockCache, avConfig);
 
 describe("Test APIService", () => {
+  it("should return null with empty symbol", () => {
+    const data = await service.getQuote(null);
+    expect(data).toBeNull();
+  });
   it("should return Google's stock quote as at now", async () => {
     setTimeout(async () => {
       const data = await service.getQuote("GOOG");
@@ -113,5 +117,10 @@ describe("Test APIService", () => {
       "3. type": "Equity",
       "4. region": "United States"
     });
+  });
+  
+  it("should return null with empty search keyword", () => {
+    const data = await service.search();
+    expect(data).toBeNull();
   });
 });
