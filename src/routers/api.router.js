@@ -2,7 +2,7 @@
 
 const express = require("express");
 const { param, query, validationResult } = require("express-validator/check");
-const { sanitizeBody } = require('express-validator/filter');
+const { sanitizeParam, sanitizeQuery } = require("express-validator/filter");
 const APIService = require("../services/api.service");
 const errorHandler = require("../lib/error-handler");
 
@@ -11,11 +11,20 @@ const service = new APIService();
 
 api.get(
   "/quotes/:symbol",
-  [param("symbol").exists().trim().isLength({ min: 1, max: 10 })],
+  [
+    param("symbol")
+      .exists()
+      .trim()
+      .isLength({ min: 1, max: 10 }),
+    sanitizeParam("symbol")
+      .trim()
+      .escape()
+  ],
   async (req, res) => {
     if (!_validate(req, res)) return;
     try {
       const symbol = req.params.symbol;
+      console.log("symbol: ", symbol);
       const data = await service.getQuote(symbol);
       res.send(data);
     } catch (err) {
@@ -26,7 +35,15 @@ api.get(
 
 api.get(
   "/daily/:symbol",
-  [param("symbol").exists().trim().isLength({ min: 1, max: 10 })],
+  [
+    param("symbol")
+      .exists()
+      .trim()
+      .isLength({ min: 1, max: 10 }),
+    sanitizeParam("symbol")
+      .trim()
+      .escape()
+  ],
   async (req, res) => {
     if (!_validate(req, res)) return;
     try {
@@ -41,7 +58,15 @@ api.get(
 
 api.get(
   "/weekly/:symbol",
-  [param("symbol").exists().trim().isLength({ min: 1, max: 10 })],
+  [
+    param("symbol")
+      .exists()
+      .trim()
+      .isLength({ min: 1, max: 10 }),
+    sanitizeParam("symbol")
+      .trim()
+      .escape()
+  ],
   async (req, res) => {
     if (!_validate(req, res)) return;
     try {
@@ -56,7 +81,15 @@ api.get(
 
 api.get(
   "/monthly/:symbol",
-  [param("symbol").exists().trim().isLength({ min: 1, max: 10 })],
+  [
+    param("symbol")
+      .exists()
+      .trim()
+      .isLength({ min: 1, max: 10 }),
+    sanitizeParam("symbol")
+      .trim()
+      .escape()
+  ],
   async (req, res) => {
     if (!_validate(req, res)) return;
     try {
@@ -71,7 +104,15 @@ api.get(
 
 api.get(
   "/search",
-  [query("q").exists().trim().isLength({ min: 1, max: 255 })],
+  [
+    query("q")
+      .exists()
+      .trim()
+      .isLength({ min: 1, max: 255 }),
+    sanitizeQuery("q")
+      .trim()
+      .escape()
+  ],
   async (req, res) => {
     if (!_validate(req, res)) return;
     try {
