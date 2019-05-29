@@ -24,7 +24,6 @@ api.get(
     if (!_validate(req, res)) return;
     try {
       const symbol = req.params.symbol;
-      console.log("symbol: ", symbol);
       const data = await service.getQuote(symbol);
       res.send(data);
     } catch (err) {
@@ -116,7 +115,7 @@ api.get(
   async (req, res) => {
     if (!_validate(req, res)) return;
     try {
-      const { q } = req.query;
+      const q = req.query.q;
       const data = await service.searchSymbol(q);
       res.send(data);
     } catch (err) {
