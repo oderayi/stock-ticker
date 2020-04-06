@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/oderayi/stock-ticker#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "esm": "^3.2.25",
     "express": "^4.17.0",
     "express-validator": "^5.3.1",
